@@ -1,0 +1,25 @@
+{
+  "name": "voting-app-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://www.github.com/fiftyfivebells/vue-voting-app.git",
+  "author": "fiftyfivebells",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/eslint server.js && nodemon server.js",
+    "build": "babel . --ignore node_modules,build --out-dir build"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.12.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-google": "^0.9.1",
+    "nodemon": "^1.12.1"
+  }
+}
