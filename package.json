@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "8.5.0"
-  },
   "scripts": {
     "start": "concurrently \"cd client && npm run build\" \"cd server && npm run start\"",
     "install": "cd client && npm install && cd ../server && npm install",
