@@ -29,16 +29,6 @@ accountSchema.pre('save', async function(next) {
     }
 });
 
-accountSchema.methods.isValidPass = function(password, cb) {
-    bcrypt.compare(password, this.password, (err, isValid) => {
-        if (err) {
-            return cb(err);
-        }
-
-        cb(null, isValid);
-    });
-};
-
 const Account = mongoose.model('account', accountSchema);
 
 module.exports = Account;
