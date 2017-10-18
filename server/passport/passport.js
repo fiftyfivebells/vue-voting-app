@@ -3,28 +3,27 @@ const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const extractJwt = require('passport-jwt').ExtractJwt;
 const Account = require('../models/account');
+
 const errMsg = {message: 'Username or password is incorrect.'};
 
 const local = new LocalStrategy(
     (username, password, done) => {
-        Account.findOne({username: username}, (err, user) => {
-            if (err) {
+        Account.findOne({username: username})
+            .then((user) => {
+                if (!user) {
+                    return done(null, false, errMsg);
+                }
+
+                const isValid = user.isValidPass(password);
+                if (!isValid) {
+                    return done(null, false, errMsg);
+                }
+                return done(null, user);
+            })
+            .catch((err) => {
                 return done(err);
-            }
-
-            if (!user) {
-                return done(null, false, errMsg);
-            }
-
-            const isValid = user.isValidPass(password);
-            if (!isValid) {
-                return done(null, false, errMsg);
-            }
-
-            return done(null, user);
-        });
-    }
-);
+            });
+    });
 
 const jwtOptions = {
     jwtFromRequest: extractJwt.fromHeader(),
