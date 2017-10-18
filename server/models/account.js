@@ -17,7 +17,7 @@ const accountSchema = new mongoose.Schema({
 
 accountSchema.pre('save', async function(next) {
 
-    const SALT_FACTOR = 8;
+    const SALT_FACTOR = 12;
     try {
         const salt = bcrypt.genSaltSync(SALT_FACTOR);
         const hash = bcrypt.hashSync(this.password, salt);
@@ -29,14 +29,12 @@ accountSchema.pre('save', async function(next) {
     }
 });
 
-accountSchema.methods.isValidPass = function(password, cb) {
-    bcrypt.compare(password, this.password, (err, isValid) => {
-        if (err) {
-            return cb(err);
-        }
-
-        cb(null, isValid);
-    });
+accountSchema.methods.isValidPass = function(password) {
+    try {
+        return bcrypt.compareSync(password, this.password);
+    } catch (err) {
+        return err;
+    }
 };
 
 const Account = mongoose.model('account', accountSchema);
