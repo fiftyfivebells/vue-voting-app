@@ -5,10 +5,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
+const passport = require('passport');
 
 // connect to mongo through mongoose
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://127.0.0.1');
+
+// initialize passport
+app.use(passport.initialize());
 
 // create static asses from the front-end's bundle
 const staticFile = express.static(path.join(__dirname, '../client/dist'));
