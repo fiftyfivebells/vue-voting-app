@@ -25,13 +25,13 @@ const local = new LocalStrategy(
             });
     });
 
-const jwtOptions = {
-    jwtFromRequest: extractJwt.fromHeader(),
-    secretOrKey: process.env.JWT_KEY || 'justfortesting',
-};
-
 const jwt = new JwtStrategy(jwtOptions, async (data, next) => {
-    console.log(data);
+
+    const jwtOptions = {
+        jwtFromRequest: extractJwt.fromHeader(),
+        secretOrKey: process.env.JWT_KEY || 'justfortesting',
+    };
+
     const acc = await Account.findById(data._id);
     if (acc) {
         return next(null, acc);
