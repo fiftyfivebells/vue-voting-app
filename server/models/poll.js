@@ -15,16 +15,14 @@ const pollSchema = new mongoose.Schema({
             default: 0,
         },
     }],
-    author: [{
-        name: {
-            type: String,
-            required: true,
-        },
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
-    }],
+    totalVotes: {
+        type: Number,
+        default: 0,
+    },
+    author: {
+        type: String,
+        require: true,
+    },
 });
 
 const Poll = mongoose.model('poll', pollSchema);
