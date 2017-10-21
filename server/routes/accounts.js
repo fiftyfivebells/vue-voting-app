@@ -3,6 +3,7 @@ const JWT = require('jsonwebtoken');
 const router = express.Router();
 const passport = require('passport');
 const Account = require('../models/account');
+require('../passport/passport');
 
 /**
  * Creates a JWT token to identify user
@@ -33,7 +34,7 @@ router.route('/register')
 
         const newAcc = new Account({username, password});
         const acct = await newAcc.save()
-        .catch((err) => { 
+        .catch((err) => {
             return {err: 'user already exists'};
         });
 
