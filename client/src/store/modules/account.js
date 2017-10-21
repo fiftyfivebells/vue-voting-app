@@ -18,8 +18,13 @@ export default {
     },
     actions: {
         logIn: async ({commit}, data) => {
-            const obj = await server.post('/account/login', data);
-            console.log(obj);
+            try {
+                const obj = await server.post('/account/login', data);
+                console.log(obj);
+            } catch (err) {
+                console.log(err);
+            }
+
         },
         register: async ({commit}, data) => {
             const obj = await server.post('/account/register', data);
