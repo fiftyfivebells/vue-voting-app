@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -9,7 +10,7 @@ const passport = require('passport');
 
 // connect to mongo through mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1');
+mongoose.connect(process.env.MONGODB_URI);
 
 // initialize passport
 app.use(passport.initialize());
