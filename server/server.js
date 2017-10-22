@@ -9,8 +9,9 @@ const acctRoutes = require('./routes/accounts.js');
 const passport = require('passport');
 
 // connect to mongo through mongoose
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1';
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(mongoUrl);
 
 // initialize passport
 app.use(passport.initialize());
@@ -19,7 +20,6 @@ app.use(passport.initialize());
 const staticFile = express.static(path.join(__dirname, '../client/dist'));
 
 app.use(staticFile);
-app.use(express.static('testpublic'));
 app.set('trust proxy', true);
 
 app.use(bodyParser.json());
