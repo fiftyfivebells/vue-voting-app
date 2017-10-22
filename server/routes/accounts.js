@@ -15,14 +15,14 @@ function generateToken(user) {
         name: user._id,
         time: 10080,
     };
-    return JWT.sign(jwtOptions, process.env.JWT_KEY || 'prokchop');
+    return JWT.sign(jwtOptions, process.env.JWT_KEY);
 }
 
 router.route('/register')
     .post(async (req, res, next) => {
         const {username, password} = req.body;
 
-        console.log(password);
+        console.log(`jwt key is ${process.env.JWT_KEY}`);
 
         if (!username) {
             return res.status(422).send({error: 'Please enter username'});
@@ -35,7 +35,7 @@ router.route('/register')
         const newAcc = new Account({username, password});
         const acct = await newAcc.save()
         .catch((err) => {
-            return {err: 'user already exists'};
+            return err;
         });
 
         const user = {
