@@ -18,8 +18,7 @@ function generateToken(user) {
     return JWT.sign(jwtOptions, process.env.JWT_KEY);
 }
 
-router.route('/register')
-    .post(async (req, res, next) => {
+router.post('/register', async (req, res, next) => {
         const {username, password} = req.body;
 
         console.log(`jwt key is ${process.env.JWT_KEY}`);
@@ -49,8 +48,7 @@ router.route('/register')
         res.set('Authorization', webToken).json(acct);
     });
 
-router.route('/login')
-    .post(async (req, res, next) => {
+router.post('login', async (req, res, next) => {
         passport.authenticate('local', {session: false}, (err, user, info) => {
             if (err) {
                 return next(err);

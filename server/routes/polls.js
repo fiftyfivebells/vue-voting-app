@@ -4,7 +4,7 @@ const passport = require('passport');
 const Poll = require('../models/poll');
 const path = require('path');
 
-router.route('/').get((req, res) => {
+router.get('/', (req, res) => {
     Poll.find().then((polls) => {
         res.send(polls);
     }).catch((err) => {
@@ -12,7 +12,7 @@ router.route('/').get((req, res) => {
     });
 });
 
-router.route('/my-polls').get(async (req, res) => {
+router.get('my-polls', async (req, res) => {
     const polls = await Poll.find({username: req.user.username})
     .catch((err) => {
         res.json('No polls to return');
@@ -21,17 +21,17 @@ router.route('/my-polls').get(async (req, res) => {
     res.json(polls);
 });
 
-router.route('/delete').post(async (req, res) => {
+router.post('/delete', async (req, res) => {
     await Poll.delete({choice: req.body.choice});
     res.json('poll deleted');
 });
 
-router.route('/add').post(async (req, res) => {
-
+router.post('/add', async (req, res) => {
+    console.log(req.body.choices);
     const poll = new Poll({
         question: req.body.question,
         choices: req.body.choices,
-        author: req.user.username,
+        author: req.body.username,
     });
 
     await poll.save().catch((err) => {
