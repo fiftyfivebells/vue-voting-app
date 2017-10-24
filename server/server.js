@@ -4,10 +4,10 @@ require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-/* const pollRoutes = require('./routes/polls.js');
+const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
-const clientRoutes = require('./routes/client.js');
- */const passport = require('passport');
+// const clientRoutes = require('./routes/client.js');
+const passport = require('passport');
 
 // connect to mongo through mongoose
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1';
@@ -41,8 +41,8 @@ app.use((req, res, next) => {
 });
 
 // handle the different routes
-// app.use('/polls', pollRoutes);
-// app.use('/account', acctRoutes);
+app.use('/polls', pollRoutes);
+app.use('/account', acctRoutes);
 app.get('/*', (req, res) => {
     res.send(staticFile);
 });
