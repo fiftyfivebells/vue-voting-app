@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
-const clientRoutes = require('./routes/client.js');
+// const clientRoutes = require('./routes/client.js');
 const passport = require('passport');
 
 // connect to mongo through mongoose
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 // handle the different routes
 app.use('/polls', pollRoutes);
 app.use('/account', acctRoutes);
-app.use('/', clientRoutes);
+app.use('/*', staticFile);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
