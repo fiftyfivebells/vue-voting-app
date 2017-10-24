@@ -1,4 +1,4 @@
 {
     "presets": ["env"],
-    "plugin": ["transform-runtime"]
+    "plugins": ["transform-runtime"]
 }
