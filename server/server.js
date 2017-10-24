@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
-// const clientRoutes = require('./routes/client.js');
 const passport = require('passport');
 
 // connect to mongo through mongoose
