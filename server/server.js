@@ -17,7 +17,7 @@ mongoose.connect(mongoUrl);
 app.use(passport.initialize());
 
 // create static asses from the front-end's bundle
-const staticFile = express.static(path.join(__dirname, '../client/dist'));
+const staticFile = express.static(path.join(__dirname, '../../client/dist'));
 
 app.use(staticFile);
 app.set('trust proxy', true);
