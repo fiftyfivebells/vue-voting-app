@@ -4,6 +4,8 @@ Free Code Camp's voting app project implemented using MongoDB, Vue.js, and Node/
 
 [![Build Status](https://travis-ci.org/fiftyfivebells/vue-voting-app.svg?branch=master)](https://travis-ci.org/fiftyfivebells/vue-voting-app)
 
+[Live demo](https://ffb-voting-app.herokuapp.com)
+
 # User Stories
 
 * As an unauthenticated user, I can:
