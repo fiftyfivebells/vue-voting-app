@@ -5,7 +5,7 @@ const Poll = require('../models/poll');
 const path = require('path');
 
 router.route('/')
-    .get('/', (req, res) => {
+    .get((req, res) => {
         Poll.find().then((polls) => {
             res.send(polls);
         }).catch((err) => {
