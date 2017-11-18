@@ -18,7 +18,13 @@ function generateToken(user) {
     return JWT.sign(jwtOptions, process.env.JWT_KEY);
 }
 
-router.post('/register', async (req, res, next) => {
+router.route('/register')
+    .get((req, res) => {
+        res.json({'msg': 'just for testing'});
+    });
+
+router.route('/register')
+    .post(async (req, res, next) => {
         const {username, password} = req.body;
 
         console.log(`jwt key is ${process.env.JWT_KEY}`);
@@ -33,9 +39,9 @@ router.post('/register', async (req, res, next) => {
 
         const newAcc = new Account({username, password});
         const acct = await newAcc.save()
-        .catch((err) => {
-            return err;
-        });
+            .catch((err) => {
+                return err;
+            });
 
         const user = {
             name: username,
@@ -48,7 +54,8 @@ router.post('/register', async (req, res, next) => {
         res.set('Authorization', webToken).json(acct);
     });
 
-router.post('login', async (req, res, next) => {
+router.route('/login')
+    .post(async (req, res, next) => {
         passport.authenticate('local', {session: false}, (err, user, info) => {
             if (err) {
                 return next(err);

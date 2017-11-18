@@ -4,45 +4,44 @@ const passport = require('passport');
 const Poll = require('../models/poll');
 const path = require('path');
 
-router.get('/', (req, res) => {
-    Poll.find().then((polls) => {
-        res.send(polls);
-    }).catch((err) => {
-        res.status(400).send(err);
-    });
-});
-
-router.get('my-polls', async (req, res) => {
-    const polls = await Poll.find({username: req.user.username})
-    .catch((err) => {
-        res.json('No polls to return');
+router.route('/')
+    .get('/', (req, res) => {
+        Poll.find().then((polls) => {
+            res.send(polls);
+        }).catch((err) => {
+            res.status(400).send(err);
+        });
     });
 
-    res.json(polls);
-});
+router.route('my-polls')
+    .get(async (req, res) => {
+        const polls = await Poll.find({username: req.user.username})
+        .catch((err) => {
+            res.json('No polls to return');
+        });
 
-router.post('/delete', async (req, res) => {
-    await Poll.delete({choice: req.body.choice});
-    res.json('poll deleted');
-});
-
-router.post('/add', async (req, res) => {
-    console.log(req.body.choices);
-    const poll = new Poll({
-        question: req.body.question,
-        choices: req.body.choices,
-        author: req.body.username,
+        res.json(polls);
     });
 
-    await poll.save().catch((err) => {
-        console.log(err);
+router.route('/delete')
+    .post(async (req, res) => {
+        await Poll.delete({choice: req.body.choice});
+        res.json('poll deleted');
     });
-    res.json(poll);
-});
 
-// testing only
-router.route('/add').get((req, res) => {
-    res.sendFile(path.join(__dirname, '../testpublic/register.html'));
-});
+router.route('/add')
+    .post(async (req, res) => {
+        console.log(req.body.choices);
+        const poll = new Poll({
+            question: req.body.question,
+            choices: req.body.choices,
+            author: req.body.author,
+        });
+
+        await poll.save().catch((err) => {
+            console.log(err);
+        });
+        res.json(poll);
+    });
 
 module.exports = router;
