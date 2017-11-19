@@ -22,8 +22,6 @@ router.route('/register')
     .post(async (req, res, next) => {
         const {username, password} = req.body;
 
-        console.log(`jwt key is ${process.env.JWT_KEY}`);
-
         if (!username) {
             return res.status(422).send({error: 'Please enter username'});
         }
@@ -59,11 +57,8 @@ router.route('/login')
             }
             
             const webToken = generateToken(user);
-            /* res.set('Authorization', webToken).json(webToken); */
-            res.json({
-                token: webToken,
-                message: 'finally worked',
-            });
+            res.set('Authorization', webToken).json(webToken);
+
             })(req, res, next);
     });
 
