@@ -5,7 +5,6 @@ require('babel-polyfill');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const routes = require('./routes/routes.js');
 const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
 const clientRoutes = require('./routes/client.js');
@@ -45,7 +44,6 @@ app.use(bodyParser.urlencoded());
 app.use('/api/polls', pollRoutes);
 app.use('/api/account', acctRoutes);
 app.use(clientRoutes);
-// app.use('/', routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
