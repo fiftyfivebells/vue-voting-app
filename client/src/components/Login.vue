@@ -37,7 +37,7 @@
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
-                                    <v-flex>
+                                    <v-flex xs4 offset-xs4>
                                         <v-btn
                                         @click='logIn'
                                         block
