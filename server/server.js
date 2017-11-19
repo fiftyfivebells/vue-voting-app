@@ -20,13 +20,12 @@ mongoose.connect(mongoUrl);
 app.use((req, res, next) => {
     const headers = {
         methods: 'PUT, GET, POST, DELETE, OPTIONS',
-        headers: 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials',
+        headers: 'X-Requested-With, Content-Type, Authorization, Content-Length',
     };
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', headers.methods);
     res.header('Access-Control-Allow-Headers', headers.headers);
-    res.header('Access-Control-Allow-Credentials', true);
     next();
 });
 
