@@ -6,6 +6,7 @@ import Home from '../components/Home.vue';
 import Login from '../components/Login.vue';
 import Polls from '../components/Polls.vue';
 import Register from '../components/Register.vue';
+import addPoll from '../components/addPoll.vue';
 
 Vue.use(Router);
 
@@ -22,6 +23,9 @@ export default new Router({
         },
         {
             path: '/polls', component: Polls,
+        },
+        {
+            path: '/add-poll', component: addPoll,
         },
     ],
 });
