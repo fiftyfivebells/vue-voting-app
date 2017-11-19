@@ -19,11 +19,6 @@ function generateToken(acct) {
 }
 
 router.route('/register')
-    .get((req, res) => {
-        res.json({'msg': 'just for testing'});
-    });
-
-router.route('/register')
     .post(async (req, res, next) => {
         const {username, password} = req.body;
 
@@ -48,7 +43,6 @@ router.route('/register')
             id: acct._id,
         };
 
-        console.log(user);
         const webToken = generateToken(user);
 
         res.set('Authorization', webToken).json(acct);
