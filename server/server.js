@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
+require('babel-polyfill');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
