@@ -63,11 +63,10 @@ router.route('/login')
             if (!user) {
                 return res.json( {message: info.message});
             }
-
-            res.send(user);
             
-            /* const webToken = generateToken(user);
-            res.set('Authorization', webToken).json(webToken); */
+            const webToken = generateToken(user);
+            /* res.set('Authorization', webToken).json(webToken); */
+            res.send(user);
             })(req, res, next);
     });
 
