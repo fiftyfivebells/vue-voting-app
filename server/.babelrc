@@ -1,9 +1,6 @@
 {
-    "presets": [
-        ["env", {
-            "targets": {
-                "node": "current"
-            }
-        }]
+    "presets": ["env"],
+    "plugins": [
+        "transform-regenerator"
     ]
 }
