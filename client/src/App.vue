@@ -1,22 +1,32 @@
 <template>
     <v-app id='app'>
         <v-navigation-drawer persistent v-model='drawer' clipped app class='white--text'>
-            <v-list dense>
-                <v-list-tile @click.stop='left = !left'>
-                    <v-list-tile-action>
-                        <v-icon>exit_to_app</v-icon>
-                    </v-list-tile-action>
+            <v-list>
+                <v-list-tile>
                     <v-list-tile-content>
-                        <v-list-tile-title>Open drawer</v-list-tile-title>
+                        <v-list-tile-title>Polls</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile v-if='isLoggedIn'>
+                    <v-list-tile-content>
+                        <v-list-tile-title>My Polls</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Add Poll</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
         <v-toolbar dark fixed app clipped-right class='orange darken-4'>
-            <v-toolbar-side-icon @click.stop='drawer = !drawer'></v-toolbar-side-icon>
+            <v-toolbar-side-icon @click='drawer = !drawer'></v-toolbar-side-icon>
             <v-toolbar-title>FCC Voting App</v-toolbar-title>
             <v-spacer></v-spacer>
-            <div @click.stop='drawerRight = !drawerRight'>Sign Up/Log-in</div>
+            <v-toolbar-items>
+                <v-btn v-bind:to='login' flat>Log In</v-btn>
+                <v-btn v-bind:to='register' flat>Register</v-btn>
+            </v-toolbar-items>
         </v-toolbar>
         <main>
             <v-container fluid>
@@ -30,37 +40,35 @@
         <v-footer class='orange darken-4 white--text'>
             <v-layout justify-space-around>
                 <span>Created by fiftyfivebells</span>
-                <span>Code on Github</span>
+                <span><a href='https://github.com/fiftyfivebells/vue-voting-app' target='_blank'>Code on Github</a></span>
             </v-layout>
         </v-footer>
     </v-app>
 </template>
 
 <script>
+import router from './router/index.js';
 
 export default {
     data() {
         return {
             drawer: false,
             right: null,
-            left: null
+            left: null,
+            login: 'login',
+            register: 'register',
+        }
+    },
+    computed: {
+        isLoggedIn() {
+            return this.$store.getters.isAuth;
         }
     }
 }
 </script>
 
 <style lang="stylus">
-@require '../node_modules/vuetify/src/stylus/settings/_colors.styl';
-
-$theme := {
-    primary: #009688
-    accent: #FFC107
-    secondary: #00796B
-    info: #B2DFDB
-    warning: $red.base
-    error: $red.base
-    success: $green.base
-};
-
-@require '../node_modules/vuetify/src/stylus/main.styl';
+.router-link-active {
+    color: white;
+}
 </style>
