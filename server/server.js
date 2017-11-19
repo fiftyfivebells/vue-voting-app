@@ -17,7 +17,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl);
 
 // enable CORS
-app.use((req, res, next) => {
+app.all('*', (req, res, next) => {
     const headers = {
         methods: 'PUT, GET, POST, DELETE, OPTIONS',
         headers: 'X-Requested-With, Content-Type, Authorization, Content-Length',
