@@ -57,7 +57,7 @@ router.route('/login')
             }
 
             const webToken = generateToken(user);
-            res.set('Authorization', webToken).json(webToken);
+            res.set('Authorization', webToken).json(user);
             })(req, res, next);
     });
 
