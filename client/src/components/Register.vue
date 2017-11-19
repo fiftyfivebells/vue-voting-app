@@ -37,7 +37,7 @@
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
-                                    <v-flex>
+                                    <v-flex xs4 offset-xs4>
                                         <v-btn
                                         @click='register'
                                         block
@@ -70,14 +70,14 @@ export default {
     methods: {
         async register() {
             try {
-                await this.$store.dispatch('register', {
+                const test = await this.$store.dispatch('register', {
                 username: this.username,
                 password: this.password
             });
-
-            this.$router.push('/');
+            // this.$router.push('/');
             } catch(err) {
                 this.loginError = true;
+                return err;
             }
             
         }
