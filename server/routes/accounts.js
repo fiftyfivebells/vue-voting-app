@@ -7,12 +7,12 @@ require('../passport/passport');
 
 /**
  * Creates a JWT token to identify user
- * @param {*} user
+ * @param {*} acct
  * @return {obj} A token attached to user to authenticate their activities 
  */
-function generateToken(user) {
+function generateToken(acct) {
     const jwtOptions = {
-        name: user._id,
+        name: acct._id,
         time: 10080,
     };
     return JWT.sign(jwtOptions, process.env.JWT_KEY);
@@ -66,7 +66,10 @@ router.route('/login')
             
             const webToken = generateToken(user);
             /* res.set('Authorization', webToken).json(webToken); */
-            res.send(user);
+            res.json({
+                token: webToken,
+                message: 'finally worked',
+            });
             })(req, res, next);
     });
 
