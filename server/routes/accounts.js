@@ -30,20 +30,26 @@ router.route('/register')
             return res.status(422).send({error: 'Please enter password'});
         }
 
-        const newAcc = new Account({username, password});
-        const acct = await newAcc.save()
-            .catch((err) => {
-                return err;
-            });
+        const currentAccount = Account.findOne({username: username});
 
-        const user = {
-            name: username,
-            id: acct._id,
-        };
+        if (currentAccount) {
+            return res.send({error: 'Account already exists'});
+        } else {
+            const newAcc = new Account({username, password});
+            const acct = await newAcc.save()
+                .catch((err) => {
+                    return err;
+                });
 
-        const webToken = generateToken(user);
+            const user = {
+                name: username,
+                id: acct._id,
+            };
 
-        res.set('Authorization', webToken).json(acct);
+            const webToken = generateToken(user);
+
+            res.set('Authorization', webToken).json(acct);
+        }
     });
 
 router.route('/login')
