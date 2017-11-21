@@ -18,8 +18,8 @@ mongoose.connect(mongoUrl);
 // enable CORS
 app.all('*', (req, res, next) => {
     const headers = {
-        methods: 'PUT, GET, POST, DELETE, OPTIONS',
-        headers: 'X-Requested-With, Content-Type, Authorization, Content-Length',
+        methods: 'PUT, GET, POST, DELETE',
+        headers: 'Authorization, X-Requested-With, Content-Type, Content-Length',
     };
 
     res.header('Access-Control-Allow-Origin', '*');
@@ -31,7 +31,7 @@ app.all('*', (req, res, next) => {
 // initialize passport
 app.use(passport.initialize());
 
-// create static asses from the front-end's bundle
+// create static assets from the front-end's bundle
 const staticFile = express.static(path.join(__dirname, '../../client/dist'));
 
 app.use(staticFile);
