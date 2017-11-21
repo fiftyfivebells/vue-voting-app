@@ -18,7 +18,7 @@ mongoose.connect(mongoUrl);
 
 // enable CORS
 app.all('*', cors({
-    origin: ['https://ffb-voting-app.herokuapp.com'],
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['Authorization'],
