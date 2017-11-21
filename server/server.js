@@ -9,6 +9,7 @@ const pollRoutes = require('./routes/polls.js');
 const acctRoutes = require('./routes/accounts.js');
 const clientRoutes = require('./routes/client.js');
 const passport = require('passport');
+const cors = require('cors');
 
 // connect to mongo through mongoose
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1';
@@ -16,7 +17,13 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl);
 
 // enable CORS
-app.all('*', (req, res, next) => {
+app.all('*', cors({
+    origin: ['https://ffb-voting-app.herokuapp.com'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Authorization'],
+}));
+/* app.all('*', (req, res, next) => {
     const headers = {
         methods: 'PUT, GET, POST, DELETE',
         headers: 'Authorization, X-Requested-With, Content-Type, Content-Length',
@@ -26,7 +33,7 @@ app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Methods', headers.methods);
     res.header('Access-Control-Allow-Headers', headers.headers);
     next();
-});
+}); */
 
 // initialize passport
 app.use(passport.initialize());
