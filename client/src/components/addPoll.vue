@@ -56,15 +56,12 @@
                                     <v-btn @click='deleteOptions'>Delete Bonus Options</v-btn>
                                 </v-flex> 
                                 <v-flex>
-                                    <v-btn>Submit Poll</v-btn>
+                                    <v-btn @click='addPoll'>Submit Poll</v-btn>
                                 </v-flex>                                   
                             </v-layout>
                         </v-form>
-                        <div>
-                            <p>{{ question }}</p>
-                            <p>{{ choices }}</p>
-                            <p>{{ choice }}</p>
-                            <p>{{ moreChoices }}</p>
+                        <div v-if='error'>
+                            <p>{{ error }}</p>
                         </div>
                     </v-container>
                 </v-card-text>
@@ -82,18 +79,35 @@ export default {
             choices: [],
             choice: '',
             moreChoices: [],
-            author: this.$store.state.user,
+            author: this.$store.getters.username,
+            error: null
         }
     },
     methods: {
         async addPoll() {
             try {
+                if (this.question === '' || this.choices.length < 2) {
+                    this.error = 'A poll needs a question and at least two choices!';
+                    return; 
+                }
+                this.error = null;
+                const choices = [...this.choices, ...this.moreChoices, this.choice]
+                    .filter((val) => {
+                        return val.trim()
+                    })
+                    .map((val) => {
+                        return { choice: val }
+                    });
                 await this.$store.dispatch('addPoll', {
                     question: this.question,
                     author: this.author,
-                    choices: [...this.choices, ...this.moreChoices],
+                    choices: choices,
                 });
-                this.$router.push('/');
+
+                this.question = '';
+                this.choices = [];
+                this.choice = '';
+                this.moreChoices = [];
             } catch (err) {
                 console.log(err);
             }
