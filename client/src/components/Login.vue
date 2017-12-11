@@ -77,6 +77,7 @@ export default {
 
             this.$router.push('/');
             } catch(err) {
+                console.log(err);
                 this.logInError = true;
             }
             

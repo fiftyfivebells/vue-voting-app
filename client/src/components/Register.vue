@@ -70,11 +70,12 @@ export default {
     methods: {
         async register() {
             try {
-                const test = await this.$store.dispatch('register', {
+                await this.$store.dispatch('register', {
                 username: this.username,
                 password: this.password
             });
-            // this.$router.push('/');
+            
+            this.$router.push('/');
             } catch(err) {
                 this.loginError = true;
                 return err;
