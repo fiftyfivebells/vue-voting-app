@@ -1,5 +1,5 @@
 import axios from 'axios';
-const server = axios.create('localhost:3000');
+const server = 'https://ffb-voting-app.herokuapp.com/api/account';
 
 export default {
     state: {
@@ -18,17 +18,25 @@ export default {
     },
     actions: {
         logIn: async ({commit}, data) => {
-            try {
-                const obj = await server.post('/account/login', data);
-                console.log(obj);
-            } catch (err) {
+            axios.post(server + '/login', data)
+            .then((res) => {
+                console.log(res);
+                const info = res.data;
+                const header = res.headers.authorization;
+                commit('createUser', info);
+                commit('addToken', header);
+            })
+            .catch((err) => {
                 console.log(err);
-            }
-
+            });
         },
-        register: async ({commit}, data) => {
-            const obj = await server.post('/account/register', data);
-            console.log(obj);
+        register: ({commit}, data) => {
+            axios.post(server + '/register', data)
+            .then((res) => {
+                const info = res.data;
+                commit('createUser', info);
+                commit('addToken', info.headers.authorization);
+            });
         },
     },
     getters: {
