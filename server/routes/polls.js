@@ -31,7 +31,10 @@ router.route('/update')
     .post(async (req, res) => {
         await Poll.update(
             {question: req.body.question},
-            {$set: {totalVotes: req.body.totalVotes, voters: req.body.voters}});
+            {$set: {
+                totalVotes: req.body.totalVotes,
+                choices: req.body.choices,
+                voters: req.body.voters}});
     });
 
 router.route('/add')
