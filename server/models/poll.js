@@ -23,6 +23,10 @@ const pollSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    voters: {
+        type: Array,
+        default: [],
+    },
 });
 
 const Poll = mongoose.model('poll', pollSchema);
