@@ -12,10 +12,8 @@
                         <v-list-tile-title>My Polls</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile>
-                    <v-list-tile-content>
-                        <v-list-tile-title>Add Poll</v-list-tile-title>
-                    </v-list-tile-content>
+                <v-list-tile>                    
+                    <router-link to='/add-poll'>Add Poll</router-link>
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
@@ -23,9 +21,12 @@
             <v-toolbar-side-icon @click='drawer = !drawer'></v-toolbar-side-icon>
             <v-toolbar-title>FCC Voting App</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
+            <v-toolbar-items v-if='!this.$store.getters.isAuth'>
                 <v-btn v-bind:to='login' flat>Log In</v-btn>
                 <v-btn v-bind:to='register' flat>Register</v-btn>
+            </v-toolbar-items>
+            <v-toolbar-items v-else>
+                <v-btn v-bind:to='login' flat>Log Out</v-btn>
             </v-toolbar-items>
         </v-toolbar>
         <main>
