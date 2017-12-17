@@ -30,7 +30,6 @@ export default {
         addPoll: async ({commit}, data) => {
             try {
                 const obj = await axios.post(server + '/add', data);
-                console.log(obj);
             } catch (err) {
                 console.log(err);
             }
@@ -46,6 +45,9 @@ export default {
         },
         setPoll: async ({commit}, data) => {
             commit('setPoll', data);
+        },
+        updatePoll: async ({commit}, data) => {
+            await axios.post(server + '/update', data);
         },
     },
     getters: {
