@@ -8,13 +8,14 @@ import Polls from '../components/Polls.vue';
 import Register from '../components/Register.vue';
 import addPoll from '../components/addPoll.vue';
 import Poll from '../components/Poll.vue';
+import myPolls from '../components/myPolls.vue';
 
 Vue.use(Router);
 
 export default new Router({
     routes: [
         {
-            path: '/', component: Home,
+            path: '/', component: Polls,
         },
         {
             path: '/login', component: Login,
@@ -30,6 +31,9 @@ export default new Router({
         },
         {
             path: '/add-poll', component: addPoll,
+        },
+        {
+            path: '/my-polls', component: myPolls,
         },
     ],
 });
