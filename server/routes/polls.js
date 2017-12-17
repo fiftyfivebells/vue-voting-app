@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 const Poll = require('../models/poll');
-const path = require('path');
 
 router.route('/')
     .get((req, res) => {
@@ -29,9 +27,14 @@ router.route('/delete')
         res.json('poll deleted');
     });
 
+router.route('/update')
+    .post(async (req, res) => {
+        const {question, totalVotes, voters} = req.body;
+        await Poll.update({question: question}, {$set: {totalVotes: totalVotes, voters: voters}});
+    });
+
 router.route('/add')
     .post(async (req, res) => {
-        console.log(req.body.choices);
         const poll = new Poll({
             question: req.body.question,
             choices: req.body.choices,
