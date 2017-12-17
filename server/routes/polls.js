@@ -29,8 +29,9 @@ router.route('/delete')
 
 router.route('/update')
     .post(async (req, res) => {
-        const {question, totalVotes, voters} = req.body;
-        await Poll.update({question: question}, {$set: {totalVotes: totalVotes, voters: voters}});
+        await Poll.update(
+            {question: req.body.question},
+            {$set: {totalVotes: req.body.totalVotes, voters: req.body.voters}});
     });
 
 router.route('/add')
