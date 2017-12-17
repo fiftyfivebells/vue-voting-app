@@ -29,7 +29,7 @@ export default {
     actions: {
         addPoll: async ({commit}, data) => {
             try {
-                const obj = await axios.post(server + '/add', data);
+                await axios.post(server + '/add', data);
             } catch (err) {
                 console.log(err);
             }
