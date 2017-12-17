@@ -49,11 +49,12 @@ export default {
 
                     const updatedData = {
                         question: this.title,
+                        choices: this.choices,
                         totalVotes: this.totalVotes,
                         voters: this.voters,
                     }
 
-                    this.$store.dispatch('update', updatedData);
+                    this.$store.dispatch('updatePoll', updatedData);
                 } else {
                     this.voted = true;
                 }
