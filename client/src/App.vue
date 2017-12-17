@@ -3,14 +3,10 @@
         <v-navigation-drawer persistent v-model='drawer' clipped app class='white--text'>
             <v-list>
                 <v-list-tile>
-                    <v-list-tile-content>
-                        <v-list-tile-title>Polls</v-list-tile-title>
-                    </v-list-tile-content>
+                    <router-link to='/polls'>Polls</router-link>
                 </v-list-tile>
                 <v-list-tile v-if='isLoggedIn'>
-                    <v-list-tile-content>
-                        <v-list-tile-title>My Polls</v-list-tile-title>
-                    </v-list-tile-content>
+                    <router-link to='/my-polls'>My Polls</router-link>
                 </v-list-tile>
                 <v-list-tile>                    
                     <router-link to='/add-poll'>Add Poll</router-link>
@@ -26,7 +22,7 @@
                 <v-btn v-bind:to='register' flat>Register</v-btn>
             </v-toolbar-items>
             <v-toolbar-items v-else>
-                <v-btn v-bind:to='login' flat>Log Out</v-btn>
+                <v-btn flat>Log Out</v-btn>
             </v-toolbar-items>
         </v-toolbar>
         <main>
