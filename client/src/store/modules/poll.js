@@ -25,6 +25,10 @@ export default {
             state.poll.choices = data.choices;
             state.poll.totalVotes = data.totalVotes;
         },
+        removePoll: (state, data) => {
+            const index = state.polls.indexOf(data);
+            state.polls.splice(index, 1);
+        },
     },
     actions: {
         addPoll: async ({commit}, data) => {
@@ -37,7 +41,6 @@ export default {
         getAllPolls: async ({commit}, data) => {
             try {
                 const polls = await axios.get(server + '/', data);
-                console.log(polls);
                 commit('getPolls', polls.data);
             } catch (err) {
                 console.log(err);
@@ -48,6 +51,10 @@ export default {
         },
         updatePoll: async ({commit}, data) => {
             await axios.post(server + '/update', data);
+        },
+        deletePoll: async ({commit}, data) => {
+            await axios.post(server + '/delete', data.question);
+            commit('removePoll', data);
         },
     },
     getters: {
