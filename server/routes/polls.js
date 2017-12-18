@@ -23,6 +23,7 @@ router.route('my-polls')
 
 router.route('/delete')
     .post(async (req, res) => {
+        console.log(req);
         await Poll.deleteOne({choice: req.body.question});
         res.json('poll deleted');
     });
