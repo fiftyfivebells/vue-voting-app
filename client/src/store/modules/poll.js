@@ -53,8 +53,7 @@ export default {
             await axios.post(server + '/update', data);
         },
         deletePoll: async ({commit}, data) => {
-            console.log(data.question);
-            await axios.post(server + '/delete', data.question);
+            await axios.post(server + '/delete', {question: data.question});
             commit('removePoll', data);
         },
     },
