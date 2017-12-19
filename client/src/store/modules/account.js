@@ -15,12 +15,16 @@ export default {
         addToken: (state, data) => {
             state.token = data;
         },
+        logOutUser: (state) => {
+            state.username = '';
+            state.id = '';
+            state.token = '';
+        },
     },
     actions: {
         logIn: async ({commit}, data) => {
             axios.post(server + '/login', data)
             .then((res) => {
-                console.log(res);
                 const info = res.data;
                 const header = res.headers.authorization;
                 commit('createUser', info);
@@ -37,6 +41,9 @@ export default {
                 commit('createUser', info);
                 commit('addToken', info.headers.authorization);
             });
+        },
+        logout: ({commit}) => {
+            commit('logOutUser');
         },
     },
     getters: {
