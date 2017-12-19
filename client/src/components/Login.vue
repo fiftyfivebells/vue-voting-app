@@ -75,7 +75,7 @@ export default {
                 password: this.password
             });
 
-            this.$router.push('/my-polls');
+            this.$router.push('/polls');
             } catch(err) {
                 console.log(err);
                 this.logInError = true;
