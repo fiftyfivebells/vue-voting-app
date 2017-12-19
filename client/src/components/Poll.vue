@@ -33,7 +33,7 @@ export default {
         }
     },
     methods: {
-        vote(option) {
+        async vote(option) {
             if (!this.$store.getters.isAuth) {
                 this.$router.push('/login');
             } else {
@@ -54,7 +54,7 @@ export default {
                         voters: this.voters,
                     }
 
-                    this.$store.dispatch('updatePoll', updatedData);
+                    await this.$store.dispatch('updatePoll', updatedData);
                 } else {
                     this.voted = true;
                 }
@@ -100,6 +100,7 @@ export default {
         this.title = this.$store.getters.question;
         this.choices = this.$store.getters.choices;
         this.totalVotes = this.$store.getters.totalVotes;
+        this.voters = this.$store.getters.voters;
         this.populateChart();
     },
 }
