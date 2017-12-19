@@ -22,7 +22,7 @@
                 <v-btn v-bind:to='register' flat>Register</v-btn>
             </v-toolbar-items>
             <v-toolbar-items v-else>
-                <v-btn flat>Log Out</v-btn>
+                <v-btn flat @click='logout'>Log Out</v-btn>
             </v-toolbar-items>
         </v-toolbar>
         <main>
@@ -54,6 +54,12 @@ export default {
             left: null,
             login: 'login',
             register: 'register',
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('logout');
+            this.$router.push('/polls');
         }
     },
     computed: {
