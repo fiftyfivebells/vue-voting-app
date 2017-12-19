@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 // routes to different views
-import Home from '../components/Home.vue';
 import Login from '../components/Login.vue';
 import Polls from '../components/Polls.vue';
 import Register from '../components/Register.vue';
