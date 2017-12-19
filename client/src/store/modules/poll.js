@@ -10,6 +10,7 @@ export default {
             question: '',
             choices: [],
             totalVotes: 0,
+            voters: [],
         },
     },
     mutations: {
@@ -34,6 +35,7 @@ export default {
         addPoll: async ({commit}, data) => {
             try {
                 await axios.post(server + '/add', data);
+                commit('addNewPoll', data);
             } catch (err) {
                 console.log(err);
             }
@@ -63,5 +65,6 @@ export default {
         question: (state) => state.poll.question,
         choices: (state) => state.poll.choices,
         totalVotes: (state) => state.poll.totalVotes,
+        voters: (state) => state.poll.voters,
     },
 };
