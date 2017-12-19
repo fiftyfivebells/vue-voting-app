@@ -47,6 +47,7 @@ export default {
             const index = this.polls.indexOf(this.selected);
             this.polls.splice(index, 1);            
             await this.$store.dispatch('deletePoll', this.selected);
+            this.warningFlag = false;
         },
         showMyPolls() {
             const allPolls = this.$store.getters.polls;
