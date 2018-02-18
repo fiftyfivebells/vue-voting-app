@@ -102,6 +102,7 @@ export default {
         this.totalVotes = this.$store.getters.totalVotes;
         this.voters = this.$store.getters.voters;
         this.populateChart();
+        this.voted = false;
     },
 }
 </script>
