@@ -17,12 +17,13 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl);
 
 // enable CORS
-app.all('*', cors({
+app.use(cors);
+/* app.all('*', cors({
     origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['Authorization'],
-}));
+})); */
 /* app.all('*', (req, res, next) => {
     const headers = {
         methods: 'PUT, GET, POST, DELETE',
