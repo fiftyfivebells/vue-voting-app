@@ -38,6 +38,7 @@ export default {
             axios.post(server + '/register', data)
             .then((res) => {
                 commit('createUser', res.data);
+                commit('addToken', res.headers.authorization);
             });
         },
         logout: ({commit}) => {
