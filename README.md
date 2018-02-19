@@ -17,3 +17,9 @@ Free Code Camp's voting app project implemented using MongoDB, Vue.js, and Node/
     2. Create a new poll
     3. See all polls I've created
     4. Delete any of my polls
+
+# TODO
+
+[ ] Fix layout so the title of the poll isn't cut off when there are too many options
+[ ] Display error message on unsuccessful attempt to log in
+[ ] Consider removing the toolbar
