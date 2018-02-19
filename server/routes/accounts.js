@@ -30,7 +30,8 @@ router.route('/register')
             return res.status(422).send({error: 'Please enter password'});
         }
 
-        const currentAccount = Account.findOne({username: username});
+        const currentAccount = await Account.findOne({username: username});
+        console.log(currentAccount);
 
         if (currentAccount) {
             return res.send({error: 'Account already exists'});
