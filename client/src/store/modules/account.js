@@ -37,9 +37,7 @@ export default {
         register: ({commit}, data) => {
             axios.post(server + '/register', data)
             .then((res) => {
-                const info = res.data;
-                commit('createUser', info);
-                commit('addToken', info.headers.authorization);
+                commit('createUser', res.data);
             });
         },
         logout: ({commit}) => {
