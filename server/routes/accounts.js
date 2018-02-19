@@ -31,7 +31,6 @@ router.route('/register')
         }
 
         const currentAccount = await Account.findOne({username: username});
-        console.log(currentAccount);
 
         if (currentAccount) {
             return res.send({error: 'Account already exists'});
