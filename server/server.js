@@ -22,17 +22,6 @@ app.all('*', cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['Authorization'],
 }));
-/* app.all('*', (req, res, next) => {
-    const headers = {
-        methods: 'PUT, GET, POST, DELETE',
-        headers: 'Authorization, X-Requested-With, Content-Type, Content-Length',
-    };
-
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', headers.methods);
-    res.header('Access-Control-Allow-Headers', headers.headers);
-    next();
-}); */
 
 // initialize passport
 app.use(passport.initialize());
