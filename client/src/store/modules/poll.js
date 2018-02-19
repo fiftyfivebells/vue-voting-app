@@ -25,6 +25,7 @@ export default {
             state.poll.question = data.question;
             state.poll.choices = data.choices;
             state.poll.totalVotes = data.totalVotes;
+            state.poll.voters = data.voters;
         },
         removePoll: (state, data) => {
             const index = state.polls.indexOf(data);
