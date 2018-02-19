@@ -48,7 +48,7 @@ router.route('/register')
 
             const webToken = generateToken(user);
 
-            res.set('Authorization', webToken).json(acct);
+            res.set('Authorization', webToken).json(acct)(req, res, next);
         }
     });
 
