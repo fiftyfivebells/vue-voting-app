@@ -9,6 +9,7 @@ dist/
 *.ntvs*
 *.njsproj
 *.sln
+jsconfig.json
 
 npm-debug.log
 yarn-error.log
