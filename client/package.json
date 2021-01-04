@@ -9,7 +9,7 @@
     "build": "webpack -p"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "chart.js": "^2.7.1",
     "vue": "^2.4.4",
     "vue-chartjs": "^3.0.2",
